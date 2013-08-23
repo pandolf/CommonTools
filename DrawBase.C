@@ -3236,7 +3236,10 @@ TPaveText* DrawBase::get_labelCMS( int legendQuadrant ) const {
     } else {
       std::string leftText;
       if( dataFiles_.size()==0 ) {
-        leftText = "CMS Simulation";
+        if( isCMSArticle_ )
+          leftText = "CMS Simulation";
+        else
+          leftText = "CMS Simulation Preliminary";
       } else {
         if( isCMSArticle_ )
           leftText = "CMS";
@@ -3315,14 +3318,18 @@ TPaveText* DrawBase::get_labelSqrt( int legendQuadrant ) const {
       label_sqrt->SetTextFont(62);
       std::string cmsText;
       if( dataFiles_.size()==0 ) {
-        cmsText = "CMS Simulation";
+        if( isCMSArticle_ )
+          cmsText = "CMS Simulation";
+        else
+          cmsText = "CMS Simulation Preliminary";
       } else {
         if( isCMSArticle_ )
           cmsText = "CMS";
         else
           cmsText = "CMS Preliminary";
       }
-      if( scaleFactor_>=0. && (dataFiles_.size() + mcFiles_.size())>0 ) {
+      //if( scaleFactor_>0. && (dataFiles_.size() + mcFiles_.size())>0 ) {
+      if( lumi_>0. && (dataFiles_.size() + mcFiles_.size())>0 ) {
         label_sqrt->AddText(Form("%s, L = %s at  #sqrt{s} = %d TeV", cmsText.c_str(), lumiText.c_str(), sqrts));
       } else {
         label_sqrt->AddText(Form("%s,  #sqrt{s} = %d TeV", cmsText.c_str(), sqrts) );
