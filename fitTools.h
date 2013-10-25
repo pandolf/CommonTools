@@ -59,7 +59,7 @@ public:
 
   static TF1* fitResponseGraph( TGraphErrors* graph , std::string funcType, std::string funcName, const std::string& option="RQ", float rangeMax=350., float rangeMin=10.);
 
-  static TH1D* getBand( TF1* f, const std::string& name );
+  static TH1D* getBand( TF1* f, const std::string& name ); // the TH1D then needs to be draw with the option "C E3"
 
   static TH1D* getBand(TF1 *f, TMatrixD const& m, std::string name, bool getRelativeBand=false, int npx=100);
 
