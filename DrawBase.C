@@ -1439,8 +1439,9 @@ TCanvas* DrawBase::drawHisto_fromHistos( std::vector<TH1D*> dataHistos, std::vec
         if( noStack_ ) //default is solid fill (if stacked)
           mcHistos[0]->SetFillStyle( fillStyle_default++ ); //so that it changes at every histo
       } else {
-        if( noStack_ ) //default is solid fill (if stacked)
+        //if( noStack_ ) //default is solid fill (if stacked)
           mcHistos[0]->SetFillStyle( mcFiles_[0].fillStyle );
+          mcHistos[0]->SetLineColor( mcFiles_[0].fillColor );
       }
       if( mcFiles_[0].markerStyle!=-1 ) {
         mcHistos[0]->SetMarkerStyle( mcFiles_[0].markerStyle );
@@ -1482,8 +1483,9 @@ TCanvas* DrawBase::drawHisto_fromHistos( std::vector<TH1D*> dataHistos, std::vec
             if( noStack_ ) //default is solid fill (if stacked)
               mcHistos[i]->SetFillStyle( fillStyle_default++ ); //so that it changes at every histo
           } else {
-            if( noStack_ ) //default is solid fill (if stacked)
+            //if( noStack_ ) //default is solid fill (if stacked)
               mcHistos[i]->SetFillStyle( mcFiles_[i].fillStyle );
+              mcHistos[i]->SetLineColor( mcFiles_[i].fillColor );
           }
           if( mcFiles_[i].markerStyle!=-1 ) {
             mcHistos[i]->SetMarkerStyle( mcFiles_[i].markerStyle );
@@ -3236,10 +3238,12 @@ TPaveText* DrawBase::get_labelCMS( int legendQuadrant ) const {
     } else {
       std::string leftText;
       if( dataFiles_.size()==0 ) {
-        if( isCMSArticle_ )
+        if( isCMSArticle_ ) {
           leftText = "CMS Simulation";
-        else
+        } else {
           leftText = "CMS Simulation Preliminary";
+          cmslabel->SetTextSize(0.035);
+        }
       } else {
         if( isCMSArticle_ )
           leftText = "CMS";
@@ -3296,7 +3300,7 @@ TPaveText* DrawBase::get_labelSqrt( int legendQuadrant ) const {
   } else if( legendQuadrant==0 ) {
     x1 = (lumiOnRightSide_) ? 0.4 : 0.7;
     y1 = 0.953;
-    x2 = 0.96;
+    x2 = 0.975;
     y2 = 0.975;
   }
 
@@ -3308,6 +3312,7 @@ TPaveText* DrawBase::get_labelSqrt( int legendQuadrant ) const {
   std::string label_sqrt_text = this->get_sqrtText();
 
   int sqrts = (is7TeV_) ? 7 : 8;
+  bool smaller = false;
 
   if( legendQuadrant!=0 ) {
     label_sqrt->AddText(label_sqrt_text.c_str());
@@ -3318,10 +3323,12 @@ TPaveText* DrawBase::get_labelSqrt( int legendQuadrant ) const {
       label_sqrt->SetTextFont(62);
       std::string cmsText;
       if( dataFiles_.size()==0 ) {
-        if( isCMSArticle_ )
+        if( isCMSArticle_ ) {
           cmsText = "CMS Simulation";
-        else
+        } else {
           cmsText = "CMS Simulation Preliminary";
+          smaller=true;
+        }
       } else {
         if( isCMSArticle_ )
           cmsText = "CMS";
@@ -3331,6 +3338,7 @@ TPaveText* DrawBase::get_labelSqrt( int legendQuadrant ) const {
       //if( scaleFactor_>0. && (dataFiles_.size() + mcFiles_.size())>0 ) {
       if( lumi_>0. && (dataFiles_.size() + mcFiles_.size())>0 ) {
         label_sqrt->AddText(Form("%s, L = %s at  #sqrt{s} = %d TeV", cmsText.c_str(), lumiText.c_str(), sqrts));
+        if( smaller ) label_sqrt->SetTextSize(0.034);
       } else {
         label_sqrt->AddText(Form("%s,  #sqrt{s} = %d TeV", cmsText.c_str(), sqrts) );
       }
