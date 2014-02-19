@@ -33,6 +33,9 @@ class StatTools {
 
   StatTools(){};
 
+  // in the following tau is the ratio between the sideband width
+  // and the signal width (1/alpha, in our notation)
+  static float computeZBiProper( float n_on, float n_off, float tau );
   static float computeZBi( float obs, float b_pred, float b_pred_err );
   static float computeZPL( float obs, float b_pred, float b_pred_err );
   static float computeZPL( TF2* f2_likelihood );
