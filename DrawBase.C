@@ -1611,6 +1611,7 @@ TCanvas* DrawBase::drawHisto_fromHistos( std::vector<TH1D*> dataHistos, std::vec
 
 
     TLegend* legend = new TLegend(lb.xMin, lb.yMin, lb.xMax, lb.yMax, legendTitle_.c_str());
+    legend->SetName("dbLegend");
     legend->SetFillColor(kWhite);
     legend->SetTextSize(legendTextSize_);
     legend->SetTextFont(42);
