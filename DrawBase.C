@@ -2012,6 +2012,82 @@ TCanvas* DrawBase::drawHisto_fromHistos( std::vector<TH1D*> dataHistos, std::vec
 
 
 
+TCanvas* DrawBase::drawYieldsCascade( const std::string& treeName, const std::string& weightVarName, std::vector< std::pair<std::string,std::string> > cuts, const std::string& saveName ) {
+
+  int nBins = cuts.size();
+
+  
+  TH2D* h2_yieldsCascade = new TH2D("yields_cascade", "", nBins, 0., nBins, 10, 0.1, 1000010. );
+  h2_yieldsCascade->SetYTitle( "Events" );
+  for( unsigned ibin=0; ibin<nBins; ++ibin )
+    h2_yieldsCascade->GetXaxis()->SetBinLabel(ibin+1, cuts[ibin].second.c_str());
+
+
+  TCanvas* cc = new TCanvas("cc", "", 600, 600);
+  cc->cd();
+  cc->SetLogy();
+  
+  TLegend* legend;
+
+  std::string selection = weightVarName + "*( ";
+
+
+  for( unsigned ibin=0; ibin<nBins; ++ibin ) {
+
+    if( ibin==0 )
+      selection = selection + " (" + cuts[ibin].first + ")";
+    else
+      selection = selection + " && (" + cuts[ibin].first + ")";
+    std::string this_selection = selection + " )";
+    this->drawHisto_fromTree( treeName, Form("%d", ibin), this_selection, 1, ibin, ibin+1., Form("tobedeleted%d", ibin), "", "", "Events", true );
+    legend = (TLegend*)gROOT->FindObject("dbLegend");
+    TGraphAsymmErrors* gr_data = new TGraphAsymmErrors(*(this->get_lastHistos_dataGraph()));
+    gr_data->SetName(Form("gr_%d", ibin));
+    THStack* mcStack = new THStack(*(this->get_lastHistos_mcStack()));
+    mcStack->SetName(Form("stack_%d", ibin));
+    std::vector<TH1D*> mcHistos = this->get_lastHistos_mc();
+    std::vector<TH1D*> dataHistos = this->get_lastHistos_data();
+
+    cc->cd();
+    if( ibin==0 ) {
+      float yMax_data = dataHistos[0]->GetMaximum();
+      float yMax_mc   = mcStack->GetMaximum();
+      float yMax = (yMax_data>yMax_mc) ? yMax_data : yMax_mc;
+      yMax *= 50.;
+      h2_yieldsCascade->GetYaxis()->SetRangeUser( 0.1, yMax );
+      h2_yieldsCascade->Draw();
+      legend->Draw("same");
+    }
+    mcStack->Draw("E same");
+    mcStack->Draw("h same");
+    gr_data->Draw("p same");
+
+  }
+
+  TPaveText* labelTop = this->get_labelTop();
+  labelTop->Draw("same");
+
+  gPad->RedrawAxis();
+
+  cc->SaveAs(Form("%s/yieldsCascade_%s.eps", this->get_outputdir().c_str(), saveName.c_str()));
+  cc->SaveAs(Form("%s/yieldsCascade_%s.png", this->get_outputdir().c_str(), saveName.c_str()));
+
+  std::string rmCommand = "rm " + this->get_outputdir() + "/tobedeleted*";
+  system( rmCommand.c_str() );
+
+  return cc;
+
+}
+
+
+
+
+
+
+
+
+
+
 
 void DrawBase::drawProfile( const std::string& yVar, const std::string& xVar, int legendQuadrant) {
 
