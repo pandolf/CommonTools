@@ -1170,6 +1170,21 @@ TCanvas* DrawBase::drawHisto( const std::string& name, const std::string& axisNa
 TCanvas* DrawBase::drawHisto_fromTree( const std::string& treeName, const std::string& varName, const std::string& selection, int nBins, float xMin, float xMax, const std::string& name, const std::string& axisName, const std::string& units, const std::string& instanceName, bool log_aussi, int legendQuadrant, const std::string& flags, const std::string& labelText, bool add_jetAlgoText  ) {
 
 
+  Double_t bins[nBins+1];
+  float binSize = (xMax-xMin)/((float)nBins);
+
+  for(unsigned ibin=0; ibin<(nBins+1); ++ibin ) 
+    bins[ibin] = xMin + (float)ibin*binSize;
+  
+  return drawHisto_fromTree( treeName, varName, selection, nBins, bins, name, axisName, units, instanceName, log_aussi, legendQuadrant, flags, labelText, add_jetAlgoText );
+
+
+}
+
+
+TCanvas* DrawBase::drawHisto_fromTree( const std::string& treeName, const std::string& varName, const std::string& selection, int nBins, Double_t* bins, const std::string& name, const std::string& axisName, const std::string& units, const std::string& instanceName, bool log_aussi, int legendQuadrant, const std::string& flags, const std::string& labelText, bool add_jetAlgoText  ) {
+
+
   // need this = true here. love these root features.
   TH1F::AddDirectory(kTRUE);
 
@@ -1191,7 +1206,7 @@ TCanvas* DrawBase::drawHisto_fromTree( const std::string& treeName, const std::s
     }
     char histoName[500];
     sprintf(histoName, "%s_%d", name.c_str(), iData);
-    TH1D* newHisto = new TH1D(histoName, "", nBins, xMin, xMax);
+    TH1D* newHisto = new TH1D(histoName, "", nBins, bins);
     tree->Project(histoName, varName.c_str(), selection.c_str());
     dataHistos.push_back( newHisto );
   }
@@ -1207,7 +1222,7 @@ TCanvas* DrawBase::drawHisto_fromTree( const std::string& treeName, const std::s
   } else {
     char histoNameMC[500];
     sprintf(histoNameMC, "%sMC_0", name.c_str());
-    TH1D* mcHisto0 = new TH1D(histoNameMC, "", nBins, xMin, xMax);
+    TH1D* mcHisto0 = new TH1D(histoNameMC, "", nBins, bins);
     treeMC->Project(histoNameMC, varName.c_str(), selection.c_str());
     mcHistos.push_back( mcHisto0 );
   }
@@ -1231,7 +1246,7 @@ TCanvas* DrawBase::drawHisto_fromTree( const std::string& treeName, const std::s
       }
       char histoNameMC[500];
       sprintf(histoNameMC, "%sMC_%d", name.c_str(), iMC);
-      TH1D* newHisto = new TH1D(histoNameMC, "", nBins, xMin, xMax);
+      TH1D* newHisto = new TH1D(histoNameMC, "", nBins, bins);
       tree->Project(histoNameMC, varName.c_str(), selection.c_str());
       mcHistos.push_back( newHisto );
     } //for mc files
@@ -1253,7 +1268,7 @@ TCanvas* DrawBase::drawHisto_fromTree( const std::string& treeName, const std::s
     } else {
       char histoNameMC[500];
       sprintf(histoNameMC, "%sMCsuperimp_0", name.c_str());
-      TH1D* newHisto = new TH1D(histoNameMC, "", nBins, xMin, xMax);
+      TH1D* newHisto = new TH1D(histoNameMC, "", nBins, bins);
       tree->Project(histoNameMC, varName.c_str(), selection.c_str());
       mcHistos_superimp.push_back( newHisto );
     }
