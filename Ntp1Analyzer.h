@@ -664,6 +664,8 @@ public :
    Float_t         betaAK5PFPUcorrJet[300];
    Float_t         betastarAK5PFPUcorrJet[300];
    Float_t         rmsCandsHandAK5PFPUcorrJet[300];
+   Float_t         qglAK5PFPUcorrJet[300];
+   Float_t         qgMLPAK5PFPUcorrJet[300];
 
    Int_t           nAK5PFNoPUJet;
    Int_t           chargeAK5PFNoPUJet[300];   //[nAK5PFNoPUJet]
@@ -735,6 +737,8 @@ public :
    Float_t         betaAK5PFNoPUJet[300];
    Float_t         betastarAK5PFNoPUJet[300];
    Float_t         rmsCandsHandAK5PFNoPUJet[300];
+   Float_t         qglAK5PFNoPUJet[300];
+   Float_t         qgMLPAK5PFNoPUJet[300];
 
    Int_t           nAK5GenJet;
    Int_t           chargeAK5GenJet[300];   //[nAK5GenJet]
@@ -1477,6 +1481,8 @@ public :
    TBranch        *b_betaAK5PFPUcorrJet;
    TBranch        *b_betastarAK5PFPUcorrJet;
    TBranch        *b_rmsCandsHandAK5PFPUcorrJet;
+   TBranch        *b_qglAK5PFPUcorrJet;
+   TBranch        *b_qgMLPAK5PFPUcorrJet;
    TBranch        *b_nAK5PFNoPUJet;   //!
    TBranch        *b_chargeAK5PFNoPUJet;   //!
    TBranch        *b_energyAK5PFNoPUJet;   //!
@@ -1547,6 +1553,8 @@ public :
    TBranch        *b_betaAK5PFNoPUJet;
    TBranch        *b_betastarAK5PFNoPUJet;
    TBranch        *b_rmsCandsHandAK5PFNoPUJet;
+   TBranch        *b_qglAK5PFNoPUJet;
+   TBranch        *b_qgMLPAK5PFNoPUJet;
    TBranch        *b_nAK5GenJet;   //!
    TBranch        *b_chargeAK5GenJet;   //!
    TBranch        *b_energyAK5GenJet;   //!

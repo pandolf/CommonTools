@@ -1107,6 +1107,8 @@ void Ntp1Analyzer::Init(TTree *tree)
    fChain->SetBranchAddress("betaAK5PFPUcorrJet", betaAK5PFPUcorrJet, &b_betaAK5PFPUcorrJet);
    fChain->SetBranchAddress("betastarAK5PFPUcorrJet", betastarAK5PFPUcorrJet, &b_betastarAK5PFPUcorrJet);
    fChain->SetBranchAddress("rmsCandsHandAK5PFPUcorrJet", rmsCandsHandAK5PFPUcorrJet, &b_rmsCandsHandAK5PFPUcorrJet);
+   fChain->SetBranchAddress("qglAK5PFPUcorrJet", qglAK5PFPUcorrJet, &b_qglAK5PFPUcorrJet);
+   fChain->SetBranchAddress("qgMLPAK5PFPUcorrJet", qgMLPAK5PFPUcorrJet, &b_qgMLPAK5PFPUcorrJet);
    fChain->SetBranchAddress("nAK5PFNoPUJet", &nAK5PFNoPUJet, &b_nAK5PFNoPUJet);
    fChain->SetBranchAddress("chargeAK5PFNoPUJet", chargeAK5PFNoPUJet, &b_chargeAK5PFNoPUJet);
    fChain->SetBranchAddress("energyAK5PFNoPUJet", energyAK5PFNoPUJet, &b_energyAK5PFNoPUJet);
@@ -1177,6 +1179,8 @@ void Ntp1Analyzer::Init(TTree *tree)
    fChain->SetBranchAddress("betaAK5PFNoPUJet", betaAK5PFNoPUJet, &b_betaAK5PFNoPUJet);
    fChain->SetBranchAddress("betastarAK5PFNoPUJet", betastarAK5PFNoPUJet, &b_betastarAK5PFNoPUJet);
    fChain->SetBranchAddress("rmsCandsHandAK5PFNoPUJet", rmsCandsHandAK5PFNoPUJet, &b_rmsCandsHandAK5PFNoPUJet);
+   fChain->SetBranchAddress("qglAK5PFNoPUJet", qglAK5PFNoPUJet, &b_qglAK5PFNoPUJet);
+   fChain->SetBranchAddress("qgMLPAK5PFNoPUJet", qgMLPAK5PFNoPUJet, &b_qgMLPAK5PFNoPUJet);
    if( isMC_ ) {
      fChain->SetBranchAddress("nAK5GenJet", &nAK5GenJet, &b_nAK5GenJet);
      fChain->SetBranchAddress("chargeAK5GenJet", chargeAK5GenJet, &b_chargeAK5GenJet);
