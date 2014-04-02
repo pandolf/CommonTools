@@ -16,7 +16,7 @@
 #include "TH1F.h"
 #include "TFile.h"
 #include "AnalysisJet.h"
-#include "BTagSFUtil/interface/BTagSFUtil.h"
+//#include "BTagSFUtil/interface/BTagSFUtil.h"
 
 
 
@@ -37,7 +37,7 @@ class Ntp1Finalizer {
   TChain* get_tree() { return tree_; };
   TFile* get_outFile() { return outFile_; };
   bool get_DEBUG() { return DEBUG_; };
-  int get_nBTags( const AnalysisJet& jet1, const AnalysisJet& jet2, BTagSFUtil* btsfutil, bool losebtags=true );
+  //int get_nBTags( const AnalysisJet& jet1, const AnalysisJet& jet2, BTagSFUtil* btsfutil, bool losebtags=true );
 
   void clear();
 

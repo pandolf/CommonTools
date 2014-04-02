@@ -146,6 +146,7 @@ void Ntp1Finalizer::writeResponseHistos( TFile* file, std::vector<TH1F*> h1_resp
 
 
 
+/*
 int Ntp1Finalizer::get_nBTags( const AnalysisJet& jet1, const AnalysisJet& jet2, BTagSFUtil* btsfutil, bool loosebtags ) {
 
   int nBTags;
@@ -182,4 +183,4 @@ int Ntp1Finalizer::get_nBTags( const AnalysisJet& jet1, const AnalysisJet& jet2,
   return nBTags;
 
 }
-
+*/

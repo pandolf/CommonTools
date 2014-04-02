@@ -1199,6 +1199,11 @@ void Ntp1Analyzer::Init(TTree *tree)
      fChain->SetBranchAddress("genWeight", &genWeight, &b_genWeight);
      fChain->SetBranchAddress("genAlphaQCD", &genAlphaQCD, &b_genAlphaQCD);
      fChain->SetBranchAddress("genAlphaQED", &genAlphaQED, &b_genAlphaQED);
+     fChain->SetBranchAddress("ptD_QCAK5GenJet", ptD_QCAK5GenJet, &b_ptD_QCAK5GenJet);
+     fChain->SetBranchAddress("axis1_QCAK5GenJet", axis1_QCAK5GenJet, &b_axis1_QCAK5GenJet);
+     fChain->SetBranchAddress("axis2_QCAK5GenJet", axis2_QCAK5GenJet, &b_axis2_QCAK5GenJet);
+     fChain->SetBranchAddress("nChg_QCAK5GenJet", nChg_QCAK5GenJet, &b_nChg_QCAK5GenJet);
+     fChain->SetBranchAddress("nNeutral_ptCutAK5GenJet", nNeutral_ptCutAK5GenJet, &b_nNeutral_ptCutAK5GenJet);
    }
 
    Notify();

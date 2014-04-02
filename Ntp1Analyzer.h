@@ -757,6 +757,11 @@ public :
    Double_t        genWeight;
    Double_t        genAlphaQCD;
    Double_t        genAlphaQED;
+   Float_t         ptD_QCAK5GenJet[300];   //[nAK5GenJet]
+   Float_t         axis1_QCAK5GenJet[300];   //[nAK5GenJet]
+   Float_t         axis2_QCAK5GenJet[300];   //[nAK5GenJet]
+   Int_t           nChg_QCAK5GenJet[300];   //[nAK5GenJet]
+   Int_t           nNeutral_ptCutAK5GenJet[300];   //[nAK5GenJet]
 
 
    std::string dataset_;
@@ -1567,6 +1572,11 @@ public :
    TBranch        *b_vertexXAK5GenJet;   //!
    TBranch        *b_vertexYAK5GenJet;   //!
    TBranch        *b_vertexZAK5GenJet;   //!
+   TBranch        *b_ptD_QCAK5GenJet;   //!
+   TBranch        *b_axis1_QCAK5GenJet;   //!
+   TBranch        *b_axis2_QCAK5GenJet;   //!
+   TBranch        *b_nChg_QCAK5GenJet;   //!
+   TBranch        *b_nNeutral_ptCutAK5GenJet;   //!
    TBranch        *b_genPtHat;   //!
    TBranch        *b_genProcessId;   //!
    TBranch        *b_genWeight;   //!
