@@ -19,10 +19,11 @@ float StatTools::computeZBi( float obs, float b_pred, float b_pred_err ) {
 
   float tau = b_pred / ( b_pred_err*b_pred_err );
   float n_off = tau*b_pred;
+
   //float P_Bi = TMath::BetaIncomplete( 1./(1.+tau), obs, n_off+1. );
   //float Z_Bi = sqrt(2)*TMath::ErfInverse( 1 - 2.*P_Bi );
 
-  return computeZBi( obs, n_off, tau );
+  return computeZBiProper( obs, n_off, tau );
 
 }
 
@@ -124,10 +125,10 @@ float StatTools::getLogLikelihoodRatio( const std::string& name, TF2* f2, int ns
 // if fix_x is true, it will maximise only on y, with x=0
 float StatTools::findMaximum2D( TF2* f2, int nsteps, bool fix_x ) {
 
-  if( fix_x ) 
-    std::cout << "[StatTools]:: Maximixing " << f2->GetName() << " with x=0." << std::endl;
-  else
-    std::cout << "[StatTools]:: Maximixing (2D) " << f2->GetName() << std::endl;
+  //if( fix_x ) 
+  //  std::cout << "[StatTools]:: Maximixing " << f2->GetName() << " with x=0." << std::endl;
+  //else
+  //  std::cout << "[StatTools]:: Maximixing (2D) " << f2->GetName() << std::endl;
 
   float xmin = f2->GetXmin();
   float xmax = f2->GetXmax();
